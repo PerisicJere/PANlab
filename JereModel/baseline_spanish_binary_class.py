@@ -43,7 +43,24 @@ for index, row in test_df.iterrows():
     predicted_labels.append(predicted_label)
     true_labels.append(label2id[label]) 
 
+results = []
 
+for i in range(len(predicted_labels)):
+    text = test_df.iloc[i]['Text']
+    predicted_label = list(label2id.keys())[predicted_labels[i]]
+    true_label = test_df.iloc[i]['Label']
+
+    if predicted_label == true_label:
+        correct = "Correct"
+    else:
+        correct = "Incorrect"
+
+    results.append([text, predicted_label, true_label, correct])
+
+resluts_df = pd.DataFrame(results, columns=['Text', 'Predicted Label', 'True Label', 'Correctness'])
+resluts_df.to_csv('spanish_bin_class_result.csv', index=False)
+
+print(resluts_df)
 
 mcc = matthews_corrcoef(true_labels, predicted_labels)
 
