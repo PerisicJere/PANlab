@@ -13,7 +13,7 @@
 | Baseline | 0.0226 |
 | Fine-Tuned | 0.7554 |
 #### Chart
-![CT-BERT bar chart](PANlab/images/MCC_covid-twitter-bert-v2.png)
+![CT-BERT bar chart](images/MCC_covid-twitter-bert-v2.png)
 ### Model for named entity recognition (NER)
 - Meta-Llama-3-8B-Instruct
 #### Idea, and challenges
@@ -25,7 +25,7 @@
 |------------|-------|-------------|--------|------------|-----------|----------------|
 |F1 scores | 0.2177 | 0.4101 | 0.3462 | 0.3237 | 0.3076 | 0.1633 | 
 #### Chart
-![Llama3 bar chart](PANlab/images/llama3-en-ner.png)
+![Llama3 bar chart](images/llama3-en-ner.png)
 ## Models for Spanish dataset
 ### Model for binary classification
 - twitter-xlm-roberta-base-sentiment
@@ -39,7 +39,7 @@
 | Baseline | 0.0321 |
 | Fine-Tuned | 0.5766 |
 #### Chart
-![RoBERTa](PANlab/images/Robrta.png)
+![RoBERTa](images/Robrta.png)
 ### Model for named entity reecognition (NER)
 - Meta-Llama-3-8B-Instruct
 #### Idea, and challenges
@@ -51,4 +51,4 @@
 |------------|-------|-------------|--------|------------|-----------|----------------|
 |F1 scores | 0.0314 | 0.0161 | 0.0771 | 0.0393 | 0.0089 | 0.0112 | 
 #### Chart
-![Llama3-es](PANlab/images/llama3-es-ner.png)
+![Llama3-es](images/llama3-es-ner.png)
