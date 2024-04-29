@@ -22,7 +22,7 @@ label2id = {"CONSPIRACY": 0, "CRITICAL": 1}
 def preprocess_text(text):
     return tokenizer.encode_plus(text, add_special_tokens=True, padding='max_length', max_length=128, return_tensors='pt', truncation=True)
 
-test_df = pd.read_csv('trainEn.csv')
+test_df = pd.read_csv('Binary-classification/trainEn.csv')
 
 predicted_labels = []
 true_labels = []
