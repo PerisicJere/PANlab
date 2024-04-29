@@ -1,5 +1,10 @@
 # PANlab
+[PAN Lab website](https://pan.webis.de/clef24/pan24-web/oppositional-thinking-analysis.html)
 
+## Author 
+- Jere Perisic
+## Paper 
+[Oppositional thinking analysis: Conspiracy theories vs critical thinking narratives](https://github.com/PerisicJere/PANlab/blob/main/Final_Report.pdf)
 ## Models for English dataset
 ### Model for binary classification
 - covid-twitter-bert-v2
@@ -17,7 +22,7 @@ python3  Binary-classification/english_model.py
 | Baseline | 0.0226 |
 | Fine-Tuned | 0.7554 |
 #### Chart
-![CT-BERT bar chart](images/MCC_covid-twitter-bert-v2.png)
+![CT-BERT bar chart](images/ct-bar.png)
 ### Model for named entity recognition (NER)
 - Meta-Llama-3-8B-Instruct
 #### Idea and challenges
@@ -59,7 +64,7 @@ python3 Binary-classification/spanish_model.py
 | Baseline | 0.0321 |
 | Fine-Tuned | 0.5766 |
 #### Chart
-![RoBERTa](images/Robrta.png)
+![RoBERTa](images/roberta-bar.png)
 ### Model for named entity reecognition (NER)
 - Meta-Llama-3-8B-Instruct
 #### Idea, and challenges
