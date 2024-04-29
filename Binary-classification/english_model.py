@@ -1,10 +1,10 @@
-from transformers import RobertaForSequenceClassification, AutoTokenizer, AdamW
+from transformers import BertForSequenceClassification, BertTokenizer, AdamW
 import torch
 import pandas as pd
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import matthews_corrcoef
-
+import numpy as np
 device = torch.cuda.is_available()
 if device is True:
     curr_dev = torch.cuda.current_device()	
@@ -14,13 +14,13 @@ else:
     device = "cpu"
     print("Using device:", device)
 
-model_name = 'cardiffnlp/twitter-xlm-roberta-base-sentiment'
-model = RobertaForSequenceClassification.from_pretrained(model_name, num_labels=2,ignore_mismatched_sizes=True)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+model_name = 'digitalepidemiologylab/covid-twitter-bert-v2'
+model = BertForSequenceClassification.from_pretrained(model_name, num_labels=2)
+tokenizer = BertTokenizer.from_pretrained(model_name)
 
 model.to(device)
 
-train_df = pd.read_csv('PANlab/Binary classification/trainEs.csv')
+train_df = pd.read_csv('/home/jere.perisic/PANlab/Binary-classification/trainEn.csv')
 label_map = {"CONSPIRACY": 0, "CRITICAL": 1}
 
 optimizer = AdamW(model.parameters(), lr=1e-5)
@@ -37,7 +37,7 @@ test_df, val_df = train_test_split(test_df, test_size=0.5, random_state=42)
 while no_improvement < patience:
     epoch += 1
     model.train()
-    for index, row in tqdm(train_df.iterrows(), total=len(train_df), desc=f"Epoch {epoch + 1}/{epochs} - Training"):
+    for index, row in tqdm(train_df.iterrows(), total=len(train_df), desc=f"Epoch {epoch + 1} - Training"):
         text = row['Text'].strip()
         label = row['Label']
         label_id = label_map[label]
@@ -54,7 +54,7 @@ while no_improvement < patience:
     predicted_labels = []
 
     with torch.no_grad():
-        for index, row in tqdm(val_df.iterrows(), total=len(val_df), desc=f"Epoch {epoch + 1}/{epochs} - Validation"):
+        for index, row in tqdm(val_df.iterrows(), total=len(val_df), desc=f"Epoch {epoch + 1} - Validation"):
             text = row['Text'].strip()
             label = row['Label']
             label_id = label_map[label]
@@ -71,17 +71,18 @@ while no_improvement < patience:
     print(f"Epoch {epoch + 1} - Validation Accuracy: {mcc}")
     if mcc > best_mcc:
         best_mcc = mcc
-        torch.save(model.state_dict(), "best_es_model.pt")  
+        torch.save(model.state_dict(), "best_en_model.pt")  
         no_improvement = 0
     else:
         no_improvement += 1
+    
+
 
 test_texts = test_df['Text'].tolist()
 test_labels = test_df['Label'].tolist()
 
-model.load_state_dict(torch.load("best_es_model.pt"))
+model.load_state_dict(torch.load("best_en_model.pt"))
 model.eval()
-
 true_labels = []
 predicted_labels = []
 
