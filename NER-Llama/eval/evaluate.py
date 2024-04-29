@@ -1,6 +1,18 @@
-import json
+import json, sys
 
-with open("NER-Llama/Results/similarities_es_results.json", "r") as file:
+
+if len(sys.argv) != 2:
+    print("Usage: python script.py language")
+    sys.exit(1)
+
+language = sys.argv[1]
+if language not in ('en', 'es'):
+    print("Language must be 'en' or 'es'")
+    sys.exit(1)
+
+input_file = f"NER-Llama/Results/similarities_{language}_results.json"
+
+with open(input_file, "r") as file:
     data = json.load(file)
 
 attribute_counts = {}

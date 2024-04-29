@@ -26,15 +26,15 @@ python3  Binary-classification/english_model.py
 - The current prompt implemented is the one that performed the best
 #### Usage
 ```bash 
-python3 NER-Llama/models/Lama3_ner_en.py
+python3 NER-Llama/models/Llama3_ner_en.py
 ```
 - After the model is finished, run this command
 ```bash
-python3 NER-Llama/eval/cosines.py
+python3 NER-Llama/eval/cosines.py en
 ```
 - To evaluate your model, run
 ```bash
-python3 NER-Llama/eval/evaluate.py
+python3 NER-Llama/eval/evaluate.py en
 ```
 #### Results of NER
 | Categories | AGENT | FACILITATOR | VICTIM | CAMPAIGNER | OBJECTIVE | NEGATIVE_EFFECT|
@@ -68,15 +68,15 @@ python3 Binary-classification/spanish_model.py
 - The next idea is to translate the data into English and evaluate it
 #### Usage
 ```bash 
-python3 NER-Llama/models/Lama3_ner_es.py
+python3 NER-Llama/models/Llama3_ner_es.py
 ```
 - After the model is finished run this command
 ```bash
-python3 NER-Llama/eval/cosines.py
+python3 NER-Llama/eval/cosines.py es
 ```
 - To evaluate your model run
 ```bash
-python3 NER-Llama/eval/evaluate.py
+python3 NER-Llama/eval/evaluate.py es
 ```
 #### Results of NER
 | Categories | AGENT | FACILITATOR | VICTIM | CAMPAIGNER | OBJECTIVE | NEGATIVE_EFFECT|

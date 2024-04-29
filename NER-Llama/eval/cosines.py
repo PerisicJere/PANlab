@@ -1,11 +1,25 @@
-import json
+import json, sys
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-with open('PANlab/NER-Llama/datasets/dataset_en_train.json', 'r') as dataset_file:
+
+if len(sys.argv) != 2:
+    print("Usage: python script.py language")
+    sys.exit(1)
+
+language = sys.argv[1]
+if language not in ('en', 'es'):
+    print("Language must be 'en' or 'es'")
+    sys.exit(1)
+    
+dataset = f'NER-Llama/datasets/dataset_{language}_train.json'
+predictions = f'NER-Llama/Results/predictions_{language}.json'
+output_file = f'NER-Llama/Results/similarities_{language}_results.json'
+
+with open(dataset, 'r') as dataset_file:
     dataset_data = json.load(dataset_file)
 
-with open('PANlab/NER-Llama/Results/predictions_en.json', 'r') as predictions_file:
+with open(predictions, 'r') as predictions_file:
     predictions_data = json.load(predictions_file)
 
 tfidf_vectorizer = TfidfVectorizer()
@@ -51,8 +65,7 @@ for data_point in dataset_data:
 
     results.append(data_point_results)
 
-# Chanfe output files
-output_file = '/PANlab/NER-Llama/Results/similarities_en_results.json'
+
 with open(output_file, 'w') as json_output:
     json.dump(results, json_output, indent=4)
 
