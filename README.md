@@ -3,15 +3,15 @@
 ## Models for English dataset
 ### Model for binary classification
 - covid-twitter-bert-v2
-#### Idea, and challenges
-- Idea was to fine tune the model with the split data
-- 80% train, 10% validation, and 10% test data
-- Early stoppings is implemented into the model, and it has patience level of 3, the best model is saved
+#### Idea and challenges
+- The idea was to fine-tune the model with the split data
+- 80% training, 10% validation, and 10% test data
+- Early stoppings are implemented into the model, and it has a patience level of 3. The best model is saved
 #### Usage
 ```bash
 python3  Binary-classification/english_model.py
 ```
-#### Compariosn of baseline and fine-tuned
+#### Comparison of baseline and fine-tuned
 | Model | MCC |
 --------|------
 | Baseline | 0.0226 |
@@ -20,19 +20,19 @@ python3  Binary-classification/english_model.py
 ![CT-BERT bar chart](images/MCC_covid-twitter-bert-v2.png)
 ### Model for named entity recognition (NER)
 - Meta-Llama-3-8B-Instruct
-#### Idea, and challenges
+#### Idea and challenges
 - Trying to get the best results with prompt engineering
-- I think the F1 score is not fair representation of the models accuracy
-- Current prompt implemented is the one that performed the best
+- I think the F1 score is not a fair representation of the model's accuracy
+- The current prompt implemented is the one that performed the best
 #### Usage
 ```bash 
 python3 NER-Llama/models/Lama3_ner_en.py
 ```
-- After the model is finished run this command
+- After the model is finished, run this command
 ```bash
 python3 NER-Llama/eval/cosines.py
 ```
-- To evaluate your model run
+- To evaluate your model, run
 ```bash
 python3 NER-Llama/eval/evaluate.py
 ```
@@ -45,15 +45,15 @@ python3 NER-Llama/eval/evaluate.py
 ## Models for Spanish dataset
 ### Model for binary classification
 - twitter-xlm-roberta-base-sentiment
-#### Idea, and challenges
-- This model was the best one considering the options
-- It is pretrained on twitter data, and it's a cross lingual model
-- It performes just a little bit better then random guessing
+#### Idea and challenges
+- This model was the best one, considering the options
+- It is pre-trained on Twitter data, and it's a cross-lingual model
+- It performs just a little bit better than random guessing
 #### Usage 
 ```bash
 python3 Binary-classification/spanish_model.py
 ```
-#### Compariosn of baseline and fine-tuned
+#### Comparison of baseline and fine-tuned
 | Model | MCC |
 --------|------
 | Baseline | 0.0321 |
@@ -64,8 +64,8 @@ python3 Binary-classification/spanish_model.py
 - Meta-Llama-3-8B-Instruct
 #### Idea, and challenges
 - This was probably the hardest subtask
-- It underperformed because of the serveral factors
-- Next idea is to translate the data to english and the evaluate it
+- It underperformed because of the several factors
+- The next idea is to translate the data into English and evaluate it
 #### Usage
 ```bash 
 python3 NER-Llama/models/Lama3_ner_es.py
