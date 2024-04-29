@@ -2,10 +2,10 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-with open('/home/jere.perisic/PANlab/NER-Llama/datasets/dataset_en_train.json', 'r') as dataset_file:
+with open('PANlab/NER-Llama/datasets/dataset_en_train.json', 'r') as dataset_file:
     dataset_data = json.load(dataset_file)
 
-with open('/home/jere.perisic/PANlab/NER-Llama/Results/predictions_en.json', 'r') as predictions_file:
+with open('PANlab/NER-Llama/Results/predictions_en.json', 'r') as predictions_file:
     predictions_data = json.load(predictions_file)
 
 tfidf_vectorizer = TfidfVectorizer()
@@ -51,7 +51,8 @@ for data_point in dataset_data:
 
     results.append(data_point_results)
 
-output_file = '/home/jere.perisic/PANlab/NER-Llama/Results/similarities_en_results.json'
+# Chanfe output files
+output_file = '/PANlab/NER-Llama/Results/similarities_en_results.json'
 with open(output_file, 'w') as json_output:
     json.dump(results, json_output, indent=4)
 

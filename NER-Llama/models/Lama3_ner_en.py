@@ -1,8 +1,4 @@
-import pandas as pd
-from transformers import BertTokenizer, BertForTokenClassification
 from transformers import pipeline
-from sklearn.metrics import f1_score, classification_report
-from tqdm import tqdm
 import transformers
 import torch
 import json
@@ -16,15 +12,15 @@ pipeline = transformers.pipeline(
     model_kwargs={"torch_dtype": torch.bfloat16},
     device_map="auto"
 )
-def get_ner(pipline):
-    output_data = []
-    with open('/home/jere.perisic/PANlab/Fine-tuned/dataset_es_train.json', 'r') as json_file:
+def get_ner(pipeline):
+    
+    with open('PANlab/Fine-tuned/dataset_es_train.json', 'r') as json_file:
         data = json.load(json_file)
     for item in data:
         ids = item['id']
         text = item['text']
         messages = [
-            {"role": "system", "content": "Instrucción: Extrae elementos específicos - AGENT, FACILITATOR, VICTIM, CAMPAIGNER, OBJECTIVE, y NEGATIVE_EFFECT - de un texto dado, omitiendo cualquier elemento que no se mencione explícitamente. Proporciona los elementos identificados directamente del texto de entrada sin alteraciones. Solo incluye elementos que se mencionen explícitamente."},
+            {"role": "system", "content": "Task: Extract specific elements—AGENT, FACILITATOR, VICTIM, CAMPAIGNER, OBJECTIVE, and NEGATIVE_EFFECT—from a given text, omitting any elements that are not explicitly mentioned. Instructions: Provide the identified elements directly from the input text without alterations. Only include elements that are mentioned explicitly."},
             {"role": "user", "content": text},
         ]
 
@@ -64,7 +60,7 @@ def get_ner(pipline):
                 else:
                     print("Warning: Entry '{}' does not contain exactly one colon. Skipping.".format(entry))
 
-        with open("predictions_es.json", "a") as json_file:
+        with open("NER-Llama/Results/predictions_en.json", "a") as json_file:
             json.dump(extracted_elements, json_file, indent=4)
             json_file.write(",\n")
         

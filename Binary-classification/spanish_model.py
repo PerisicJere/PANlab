@@ -20,7 +20,7 @@ tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 model.to(device)
 
-train_df = pd.read_csv('/home/jere.perisic/PANlab/Binary-classification/trainEs.csv')
+train_df = pd.read_csv('PANlab/Binary-classification/trainEs.csv')
 label_map = {"CONSPIRACY": 0, "CRITICAL": 1}
 
 optimizer = AdamW(model.parameters(), lr=1e-5)

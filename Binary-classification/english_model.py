@@ -4,7 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import matthews_corrcoef
-import numpy as np
+
 device = torch.cuda.is_available()
 if device is True:
     curr_dev = torch.cuda.current_device()	
@@ -20,7 +20,7 @@ tokenizer = BertTokenizer.from_pretrained(model_name)
 
 model.to(device)
 
-train_df = pd.read_csv('/home/jere.perisic/PANlab/Binary-classification/trainEn.csv')
+train_df = pd.read_csv('PANlab/Binary-classification/trainEn.csv')
 label_map = {"CONSPIRACY": 0, "CRITICAL": 1}
 
 optimizer = AdamW(model.parameters(), lr=1e-5)
