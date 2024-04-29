@@ -20,10 +20,10 @@ tokenizer = BertTokenizer.from_pretrained(model_name)
 
 model.to(device)
 
-train_df = pd.read_csv('PANlab/Binary-classification/trainEn.csv')
+train_df = pd.read_csv('trainEn.csv')
 label_map = {"CONSPIRACY": 0, "CRITICAL": 1}
 
-optimizer = AdamW(model.parameters(), lr=1e-5)
+optimizer = AdamW(model.parameters(), lr=1e-6)
 epoch = 0
 best_mcc = -1  
 patience = 3   

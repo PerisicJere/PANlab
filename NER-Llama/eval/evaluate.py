@@ -1,6 +1,6 @@
 import json
 
-with open("PANlab/NER-Llama/Results/similarities_es_results.json", "r") as file:
+with open("NER-Llama/Results/similarities_es_results.json", "r") as file:
     data = json.load(file)
 
 attribute_counts = {}

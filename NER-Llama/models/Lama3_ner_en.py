@@ -1,7 +1,7 @@
 from transformers import pipeline
 import transformers
 import torch
-import json
+import json, re
 
 
 model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
@@ -14,7 +14,7 @@ pipeline = transformers.pipeline(
 )
 def get_ner(pipeline):
     
-    with open('PANlab/Fine-tuned/dataset_es_train.json', 'r') as json_file:
+    with open('NER-Llama/datasets/dataset_en_train.json', 'r') as json_file:
         data = json.load(json_file)
     for item in data:
         ids = item['id']
@@ -54,7 +54,7 @@ def get_ner(pipeline):
                 parts = entry.split(":", 1)
                 if len(parts) == 2:
                     key, value = parts
-                    key = key.replace("**", "").strip()
+                    key = re.sub(r'\*', '', key).strip()
                     value = value.strip()
                     extracted_elements[key] = value
                 else:
