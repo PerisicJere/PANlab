@@ -4,7 +4,18 @@
 ## Author 
 - Jere Perisic
 ## Paper 
+<<<<<<< HEAD
 [Oppositional thinking analysis: Conspiracy theories vs critical thinking narratives](https://github.com/PerisicJere/PANlab/blob/main/Oppositional%20thinking%20analysis%20Conspiracy%20vs%20critical%20narratives.pdf)
+=======
+[Oppositional thinking analysis: Conspiracy theories vs critical thinking narratives](https://github.com/PerisicJere/PANlab/blob/main/Final_Report.pdf)
+## Llama-3 token 
+- In NER-Llama/models/Llama3_ner_en.py and NER-Llama/models/Llama3_ner_es.py you need to replace token with your unique one
+- Login into [HuggingFace](https://huggingface.co/)
+- Once you have logged in go to [HF Settings](https://huggingface.co/settings/tokens)
+- If the link doesn't work go to your profile settings -> Acess Tokens
+- Generate new token with read option selected
+- Copy that token and pass it in as a parameter.
+>>>>>>> ff2bac7 (Comments)
 ## Models for English dataset
 ### Model for binary classification
 - covid-twitter-bert-v2
