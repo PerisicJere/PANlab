@@ -4,7 +4,7 @@
 ## Author 
 - Jere Perisic
 ## Paper 
-[Oppositional thinking analysis: Conspiracy theories vs critical thinking narratives](https://github.com/PerisicJere/PANlab/blob/main/Final_Report.pdf)
+[Oppositional thinking analysis: Conspiracy theories vs critical thinking narratives]([https://github.com/PerisicJere/PANlab/blob/main/Final_Report.pdf](https://github.com/PerisicJere/PANlab/blob/main/Oppositional%20thinking%20analysis%20Conspiracy%20vs%20critical%20narratives.pdf))
 ## Models for English dataset
 ### Model for binary classification
 - covid-twitter-bert-v2
