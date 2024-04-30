@@ -89,3 +89,8 @@ python3 NER-Llama/eval/evaluate.py es
 |F1 scores | 0.0314 | 0.0161 | 0.0771 | 0.0393 | 0.0089 | 0.0112 | 
 #### Chart
 ![Llama3-es](images/llama3-es-ner.png)
+
+
+### Significant testing 
+- McNemar's test for binary classification
+- Wilcoxon for NER
