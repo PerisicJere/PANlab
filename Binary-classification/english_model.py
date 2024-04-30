@@ -3,7 +3,7 @@ import torch
 import pandas as pd
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import matthews_corrcoef
+from sklearn.metrics import matthews_corrcoef, confusion_matrix
 
 device = torch.cuda.is_available()
 if device is True:
@@ -37,7 +37,7 @@ test_df, val_df = train_test_split(test_df, test_size=0.5, random_state=42)
 while no_improvement < patience:
     epoch += 1
     model.train()
-    for index, row in tqdm(train_df.iterrows(), total=len(train_df), desc=f"Epoch {epoch + 1} - Training"):
+    for index, row in tqdm(train_df.iterrows(), total=len(train_df), desc=f"Epoch {epoch} - Training"):
         text = row['Text'].strip()
         label = row['Label']
         label_id = label_map[label]
@@ -54,7 +54,7 @@ while no_improvement < patience:
     predicted_labels = []
 
     with torch.no_grad():
-        for index, row in tqdm(val_df.iterrows(), total=len(val_df), desc=f"Epoch {epoch + 1} - Validation"):
+        for index, row in tqdm(val_df.iterrows(), total=len(val_df), desc=f"Epoch {epoch} - Validation"):
             text = row['Text'].strip()
             label = row['Label']
             label_id = label_map[label]
@@ -68,7 +68,7 @@ while no_improvement < patience:
             predicted_labels.append(predicted_label_id)
 
     mcc = matthews_corrcoef(true_labels, predicted_labels)
-    print(f"Epoch {epoch + 1} - Validation Accuracy: {mcc}")
+    print(f"Epoch {epoch} - Validation Accuracy: {mcc}")
     if mcc > best_mcc:
         best_mcc = mcc
         torch.save(model.state_dict(), "best_en_model.pt")  
@@ -98,6 +98,7 @@ with torch.no_grad():
         true_labels.append(label_id)
         predicted_labels.append(predicted_label_id)
 
-
+cm = confusion_matrix(true_labels, predicted_labels)
 mcc = matthews_corrcoef(true_labels, predicted_labels)
+print("Confusion matrix: ", cm)
 print("Test Accuracy:", mcc)

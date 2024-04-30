@@ -1,5 +1,6 @@
-import json, sys
-
+import json
+import sys
+import numpy as np
 
 if len(sys.argv) != 2:
     print("Usage: python script.py language")
@@ -16,17 +17,35 @@ with open(input_file, "r") as file:
     data = json.load(file)
 
 attribute_counts = {}
+confusion_matrix = np.zeros((2, 2), dtype=int)  
 
 for entry in data:
     for attribute in entry['attributes']:
         attr_name = attribute['attribute']
+        actual = attribute['dataset_value']
+        predicted = attribute['prediction_value']
+        similarity = attribute['cosine_similarity']
+
+        if actual == predicted:
+            actual_class = 1
+        else:
+            actual_class = 0
+
+        if similarity == 1.0:
+            predicted_class = 1
+        else:
+            predicted_class = 0
+
+        confusion_matrix[actual_class][predicted_class] += 1
+
         if attr_name not in attribute_counts:
             attribute_counts[attr_name] = {'true_positives': 0, 'false_positives': 0, 'false_negatives': 0}
-        if attribute['cosine_similarity'] == 1.0 and attribute['dataset_value'] == attribute['prediction_value']:
+        
+        if similarity == 1.0 and actual == predicted:
             attribute_counts[attr_name]['true_positives'] += 1
-        elif attribute['cosine_similarity'] == 0.0 and attribute['dataset_value'] != attribute['prediction_value']:
+        elif similarity == 0.0 and actual != predicted:
             attribute_counts[attr_name]['false_positives'] += 1
-        elif attribute['cosine_similarity'] == 0.0 and attribute['dataset_value'] == attribute['prediction_value']:
+        elif similarity == 0.0 and actual == predicted:
             attribute_counts[attr_name]['false_negatives'] += 1
 
 attribute_f1_scores = {}
@@ -40,4 +59,7 @@ for attr_name, counts in attribute_counts.items():
     attribute_f1_scores[attr_name] = f1_score
 
 for attr_name, f1_score in attribute_f1_scores.items():
-    print(f"F1 Score for '{attr_name}': {f1_score}")
+    print(f"F1 Score for '{attr_name}': {f1_score:.4f}")
+
+print("Confusion Matrix:")
+print(confusion_matrix)

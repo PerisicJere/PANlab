@@ -1,5 +1,5 @@
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
-from sklearn.metrics import matthews_corrcoef, accuracy_score
+from sklearn.metrics import matthews_corrcoef, confusion_matrix
 import torch, tqdm
 import pandas as pd
 from prettytable import PrettyTable
@@ -58,12 +58,13 @@ for i in range(len(predicted_labels)):
     results.append([text, predicted_label, true_label, correct])
 
 resluts_df = pd.DataFrame(results, columns=['Text', 'Predicted Label', 'True Label', 'Correctness'])
-resluts_df.to_csv('PANlab/Baselines/results/spanish_bin_class_result.csv', index=False)
+
 
 print(resluts_df)
 
 mcc = matthews_corrcoef(true_labels, predicted_labels)
-
+cm = confusion_matrix(true_labels, predicted_labels)
+print(cm)
 myTable = PrettyTable(["Metric", "Score"])
 myTable.add_row(["Matthews Correlation Coefficient", mcc])
 print(myTable)
