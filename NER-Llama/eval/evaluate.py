@@ -19,6 +19,7 @@ with open(input_file, "r") as file:
 attribute_counts = {}
 confusion_matrix = np.zeros((2, 2), dtype=int)  
 
+# process similarity results
 for entry in data:
     for attribute in entry['attributes']:
         attr_name = attribute['attribute']
@@ -48,6 +49,7 @@ for entry in data:
         elif similarity == 0.0 and actual == predicted:
             attribute_counts[attr_name]['false_negatives'] += 1
 
+# calculate F1 scores for attributes
 attribute_f1_scores = {}
 for attr_name, counts in attribute_counts.items():
     true_positives = counts['true_positives']

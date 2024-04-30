@@ -6,12 +6,16 @@ import json, re
 
 model_id = "meta-llama/Meta-Llama-3-8B-Instruct"
 
+# Create a text generation pipeline
 pipeline = transformers.pipeline(
     "text-generation",
     model=model_id,
     model_kwargs={"torch_dtype": torch.bfloat16},
-    device_map="auto"
+    device_map="auto",
+    token="more in README"
 )
+
+# function to perform Named Entity Recognition (NER)
 def get_ner(pipline):
     
     with open('NER-Llama/datasets/dataset_es_train.json', 'r') as json_file:
@@ -48,6 +52,8 @@ def get_ner(pipline):
         extracted_elements = {
             "id": ids,
         }
+
+        # split generated text and extract elements
         split_text = generated_text.split("\n")
         for entry in split_text:
             if ":" in entry:
@@ -59,7 +65,8 @@ def get_ner(pipline):
                     extracted_elements[key] = value
                 else:
                     print("Warning: Entry '{}' does not contain exactly one colon. Skipping.".format(entry))
-
+        
+        # write the extracted elements to a JSON file
         with open("NER-Llama/Results/predictions_es.json", "a") as json_file:
             json.dump(extracted_elements, json_file, indent=4)
             json_file.write(",\n")

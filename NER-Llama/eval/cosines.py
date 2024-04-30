@@ -24,6 +24,7 @@ with open(predictions, 'r') as predictions_file:
 
 tfidf_vectorizer = TfidfVectorizer()
 
+# function to compute cosine similarity between two strings
 def compute_cosine_similarity(string1, string2):
     try:
         tfidf_matrix = tfidf_vectorizer.fit_transform([string1, string2])
@@ -36,6 +37,7 @@ attributes = ["AGENT", "FACILITATOR", "VICTIM", "CAMPAIGNER", "OBJECTIVE", "NEGA
 
 results = []
 
+# iterate through each data point in the dataset, find corresponding prediction data, compare each attribute with prediction
 for data_point in dataset_data:
     data_point_id = data_point['id']
     data_point_results = {"id": data_point_id, "attributes": []}

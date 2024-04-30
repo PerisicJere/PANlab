@@ -23,6 +23,8 @@ model.to(device)
 train_df = pd.read_csv('PANlab/Binary-classification/trainEs.csv')
 label_map = {"CONSPIRACY": 0, "CRITICAL": 1}
 
+# training parameters
+
 optimizer = AdamW(model.parameters(), lr=1e-5)
 epoch = 0
 best_mcc = -1  
@@ -30,9 +32,12 @@ patience = 3
 no_improvement = 0 
 max_seq_length = 128
 
+# split data into train, validation, and test sets
+
 train_df, test_df = train_test_split(train_df, test_size=0.2, random_state=42)
 
 test_df, val_df = train_test_split(test_df, test_size=0.5, random_state=42)
+# Training Loop
 
 while no_improvement < patience:
     epoch += 1
@@ -48,6 +53,7 @@ while no_improvement < patience:
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()
+# Validation Loop
 
     model.eval()
     true_labels = []
