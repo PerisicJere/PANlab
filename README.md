@@ -94,3 +94,6 @@ python3 NER-Llama/eval/evaluate.py es
 ### Significant testing 
 - McNemar's test for binary classification
 - Wilcoxon for NER
+```bash
+python3 sig_test.py
+```
